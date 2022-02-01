@@ -5,7 +5,6 @@
 #include "Player.h"
 #include "Card.h"
 
-
 Player::Player(Card crd1, Card crd2) {
     card1 = crd1;
     card2 = crd2;
@@ -69,6 +68,7 @@ void Player::evaluateHand(vector<Card> board) {
     for (int i = 0; i < board.size(); i++){
         fullHand.push_back(board[i]);
     }
+    //sorting into ascending order
     sort(fullHand);
     //checking and setting hand values
     if (isStraightFlush(fullHand)){
