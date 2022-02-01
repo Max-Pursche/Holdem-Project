@@ -10,15 +10,15 @@ Card::Card(int intVal, int suit, int face) {
     faceVal = Face(face);
 }
 
-Face Card::getFace() {
+Face Card::getFace() const {
     return faceVal;
 }
 
-Suit Card::getSuit() {
+Suit Card::getSuit() const {
     return suitVal;
 }
 
-int Card::getValue() {
+int Card::getValue() const  {
     return value;
 }
 

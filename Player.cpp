@@ -10,15 +10,15 @@ Player::Player(Card crd1, Card crd2) {
     card2 = crd2;
 }
 
-Card Player::getCard1() {
+Card Player::getCard1() const {
     return card1;
 }
 
-Card Player::getCard2() {
+Card Player::getCard2() const {
     return card2;
 }
 
-int Player::getHandVal() {
+int Player::getHandVal() const {
     return handVal;
 }
 
@@ -45,8 +45,7 @@ void Player::setHandVal(int value) {
 //                values[j] = temp ;
 //            }
 //}
-void sort(vector<Card> hand) // ascending
-{
+void Player::Sort(vector<Card> hand) { // ascending
     for( size_t i = 0 ; i < hand.size(); ++i ) {
         for (size_t j = i + 1; j < hand.size(); ++j) {
             if (hand[i].getValue() > hand[j].getValue()) { //need to overload card operators for >,<,= function
@@ -58,7 +57,7 @@ void sort(vector<Card> hand) // ascending
     }
 }
 
-//straight flush is the highest hand I am going to add for now
+//straight flush is the highest hand I am going to add for now, maybe royal if I can finish this before sunday
 void Player::evaluateHand(vector<Card> board) {
     //loop through the board to make a hand which will be set to a hand value,
     //want to make this organised from lowest to highest value for easier looping in isStraight
@@ -69,7 +68,7 @@ void Player::evaluateHand(vector<Card> board) {
         fullHand.push_back(board[i]);
     }
     //sorting into ascending order
-    sort(fullHand);
+    Sort(fullHand);
     //checking and setting hand values
     if (isStraightFlush(fullHand)){
         setHandVal(9);

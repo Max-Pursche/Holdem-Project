@@ -19,11 +19,11 @@ public:
 
     Card(int, int, int);
 
-    int getValue();
+    int getValue() const;
 
-    Suit getSuit();
+    Suit getSuit() const;
 
-    Face getFace();
+    Face getFace()const;
 
     void setValue(int);
 

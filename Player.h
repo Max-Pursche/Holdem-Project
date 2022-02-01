@@ -19,11 +19,11 @@ public:
 
     Player(Card, Card);
 
-    Card getCard1();
+    Card getCard1() const;
 
-    Card getCard2();
+    Card getCard2() const;
 
-    int getHandVal();
+    int getHandVal() const;
 
     void setCard1(Card);
 
@@ -31,7 +31,7 @@ public:
 
     void setHandVal(int);
 
-    void sort(vector<Card>);
+    void Sort(vector<Card>);
 
     void evaluateHand(vector<Card>);
 
