@@ -7,7 +7,7 @@
 #include "vector"
 
 enum Suit{ HEART = 1, CLUB = 2, SPADE = 3, DIAMOND = 4 };
-enum Face{ NOFACE = 10, JACK = 11, QUEEN = 12, KING = 13, ACE = 14};
+enum Face{NULLFACE = 0, JACK = 11, QUEEN = 12, KING = 13, ACE = 14};
 
 class Card {
 private:

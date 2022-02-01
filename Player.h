@@ -31,6 +31,8 @@ public:
 
     void setHandVal(int);
 
+    void sort(vector<Card>);
+
     void evaluateHand(vector<Card>);
 
     bool isStraight(vector<Card>);

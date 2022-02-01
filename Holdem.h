@@ -15,9 +15,11 @@ using namespace std;
 
 class HoldemGame {
 private:
-
+    //need to init a Deck
     std::vector<Card> const deck;
+
     std::vector<Card> cardsInPlay;
+    //consdering making these guys in main and having them as parameters
     Player P1;
     Player P2;
     Player P3;
