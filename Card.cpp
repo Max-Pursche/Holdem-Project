@@ -24,6 +24,7 @@ int Card::getValue() const  {
 
 void Card::setFaceVal(int intVal) {
     faceVal = Face(intVal);
+    setValue(Face(intVal));
 }
 
 void Card::setSuitVal(int intVal) {

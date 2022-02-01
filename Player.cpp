@@ -34,18 +34,8 @@ void Player::setHandVal(int value) {
     handVal = value;
 }
 
-//void sort( face_values& values ) // ascending
-//{
-//    for( std::size_t i = 0 ; i < NCARDS ; ++i )
-//        for( std::size_t j = i+1 ; j < NCARDS ; ++j )
-//            if( values[i] > values[j] )
-//            {
-//                int temp = values[i] ;
-//                values[i] = values[j] ;
-//                values[j] = temp ;
-//            }
-//}
-void Player::Sort(vector<Card> hand) { // ascending
+// sorts a vector in ascending order
+void Player::Sort(vector<Card> hand) {
     for( size_t i = 0 ; i < hand.size(); ++i ) {
         for (size_t j = i + 1; j < hand.size(); ++j) {
             if (hand[i].getValue() > hand[j].getValue()) { //need to overload card operators for >,<,= function
@@ -67,7 +57,7 @@ void Player::evaluateHand(vector<Card> board) {
     for (int i = 0; i < board.size(); i++){
         fullHand.push_back(board[i]);
     }
-    //sorting into ascending order
+    //sorting into ascending order 2 - 14
     Sort(fullHand);
     //checking and setting hand values
     if (isStraightFlush(fullHand)){
@@ -97,7 +87,6 @@ void Player::evaluateHand(vector<Card> board) {
     else{
         setHandVal(1);
     }
-
 }
 
 bool Player::isFlush(vector<Card> hand) {
@@ -116,13 +105,17 @@ bool Player::isFlush(vector<Card> hand) {
 }
 
 bool Player::isStraight(vector<Card> hand) {
-    //fill vector with false booleans that is the size of the hand
-    vector<bool> chainOrdering[hand.size()];
-    for (int i = 0; i < hand.size(); i++) {
-        chainOrdering->push_back(false);
-    }
+    int ordering;
     //looping through a sorted list of cards in ascending int value 2 - 14(Ace)
-
+    for (int i = 0; i < hand.size(); i++) {
+        if (hand[i+1].getValue() == hand[i].getValue() + 1) {
+            ordering++;
+        }
+        if (ordering == 5){
+            return true;
+        }
+    }
+    return false;
 }
 
 //checks for both true booleans for
@@ -131,16 +124,7 @@ bool Player::isStraightFlush(vector<Card> hand) {
     return isStraight(hand) && isFlush(hand);
 }
 
-//unsure if needed
-bool Player::isFullHouse(vector<Card> hand) {
-    //if pair + threeOfKind return true
-    //else return false
-    if (isPairTripQuad(hand) == 2){
-        return true;
-    }
-    else return false;
-}
-
+//split up
 int Player::isPairTripQuad(vector<Card> hand) {
     //boolean values for the possible hand combinations
     bool pair = false;
@@ -148,8 +132,47 @@ int Player::isPairTripQuad(vector<Card> hand) {
     bool threeOfKind = false;
     bool fourOfKind = false;
     //Looping through the hand to check for occurrences of the same card
-    int occurrences;
+    int occurrences = 0;
+    for (int i = 0; i < hand.size(); i++) {
+        if (hand[i+1].getValue() == hand[i].getValue()) {
+            occurrences++;
+        }
+        if (occurrences == 1){
+            pair = true;
+        }
+    }
 
+    occurrences = 0;
+    for (int i = 0; i < hand.size(); i++) {
+        if (hand[i+1].getValue() == hand[i].getValue()) {
+            occurrences++;
+        }
+        if (occurrences == 2){
+            threeOfKind = true;
+        }
+    }
+
+    occurrences = 0;
+    for (int i = 0; i < hand.size(); i++) {
+        if (hand[i+1].getValue() == hand[i].getValue()) {
+            occurrences++;
+        }
+        if (occurrences == 3){
+            fourOfKind = true;
+        }
+    }
+
+    occurrences = 0;
+    for (int i = 0; i < hand.size(); i++) {
+        int pair1 = -1;
+        if ((hand[i+1].getValue() == hand[i].getValue()) && (hand[i].getValue() != pair1)) {
+            pair1 = hand[i].getValue();
+            occurrences++;
+        }
+        if (occurrences == 2){
+            twoPair = true;
+        }
+    }
     //returns the level of hand, 1 being highest and 5 being the lowest with 6 being if no hand was made
     if (fourOfKind) {
         return 1;
