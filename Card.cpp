@@ -33,3 +33,4 @@ void Card::setSuitVal(int intVal) {
 void Card::setValue(int intVal) {
     value = intVal;
 }
+

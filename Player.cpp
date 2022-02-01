@@ -126,6 +126,7 @@ bool Player::isStraight(vector<Card> hand) {
 
 }
 
+//checks for both true booleans for
 bool Player::isStraightFlush(vector<Card> hand) {
     //checks boolean values of isStraight and isFlush
     return isStraight(hand) && isFlush(hand);
@@ -142,13 +143,13 @@ bool Player::isFullHouse(vector<Card> hand) {
 }
 
 int Player::isPairTripQuad(vector<Card> hand) {
-    //boolean values for the possible hand combonations
+    //boolean values for the possible hand combinations
     bool pair = false;
     bool twoPair = false;
     bool threeOfKind = false;
     bool fourOfKind = false;
-    //Looping through the hand to check for occurences of the same card
-
+    //Looping through the hand to check for occurrences of the same card
+    int occurrences;
 
     //returns the level of hand, 1 being highest and 5 being the lowest with 6 being if no hand was made
     if (fourOfKind) {

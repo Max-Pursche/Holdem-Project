@@ -30,6 +30,18 @@ public:
     void setSuitVal(int);
 
     void setFaceVal(int);
+
+    //Overloaded Boolean Operators
+    friend bool operator > (const Card& card1L, const Card& card2R);
+
+    friend bool operator >= (const Card& card1L, const Card& card2R);
+
+    friend bool operator < (const Card& card1L, const Card& card2R);
+
+    friend bool operator <= (const Card& card1L, const Card& card2R);
+
+    //Overloaded Printing Operators
+    
 };
 
 
