@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Card.h"
 
+
 Player::Player(Card crd1, Card crd2) {
     card1 = crd1;
     card2 = crd2;
@@ -36,4 +37,5 @@ void Player::setHandVal(int value) {
 
 void Player::evaluateHand(vector<Card> board) {
     //loop through the board to make a hand which will be set to a hand value
+
 }
