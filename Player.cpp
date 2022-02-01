@@ -37,6 +37,40 @@ void Player::setHandVal(int value) {
 
 void Player::evaluateHand(vector<Card> board) {
     //loop through the board to make a hand which will be set to a hand value
+    vector<Card> fullHand;
+    fullHand.push_back(card1);
+    fullHand.push_back(card2);
+    for (int i = 0; i < board.size(); i++){
+        fullHand.push_back(board[i]);
+    }
+
+}
+
+bool Player::isFlush(vector<Card> hand) {
+    int flushCrit = 0;
+    for (int i = 0; i < hand.size(); i++) {
+        if (hand[i].getSuit() == hand[i+1].getSuit()){
+            flushCrit++;
+        }
+    }
+    if (flushCrit == 5){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+bool Player::isStraight(vector<Card>) {
+
+}
+
+bool Player::isPairTripQuad(vector<Card> hand) {
+    bool pair = false;
+    bool twoPair = false;
+    bool threeOfKind = false;
+    bool fourOfKind = false;
 
 
 }
+

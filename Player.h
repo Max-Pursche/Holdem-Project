@@ -32,6 +32,12 @@ public:
     void setHandVal(int);
 
     void evaluateHand(vector<Card>);
+
+    bool isStraight(vector<Card>);
+
+    bool isFlush(vector<Card>);
+
+    bool isPairTripQuad(vector<Card>);
 };
 
 
