@@ -7,7 +7,7 @@
 #include "vector"
 
 enum Suit{ HEART = 1, CLUB = 2, SPADE = 3, DIAMOND = 4 };
-enum Face{NULLFACE = 0, JACK = 11, QUEEN = 12, KING = 13, ACE = 14};
+enum Face{NULLFACE = 0, JACK = 1, QUEEN = 2, KING = 3, ACE = 4};
 
 class Card {
 private:
@@ -41,7 +41,7 @@ public:
     friend bool operator <= (const Card& card1L, const Card& card2R);
 
     //Overloaded Printing Operators
-    
+
 };
 
 
