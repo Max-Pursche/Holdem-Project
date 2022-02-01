@@ -37,7 +37,11 @@ public:
 
     bool isFlush(vector<Card>);
 
-    bool isPairTripQuad(vector<Card>);
+    bool isStraightFlush(vector<Card>);
+
+    bool isFullHouse(vector<Card>);
+
+    int isPairTripQuad(vector<Card>);
 };
 
 

@@ -61,11 +61,26 @@ bool Player::isFlush(vector<Card> hand) {
     }
 }
 
-bool Player::isStraight(vector<Card>) {
+bool Player::isStraight(vector<Card> hand) {
+    //fill vector with false booleans
+    vector<bool> chainOrdering[hand.size()];
+    for (int i = 0; i < hand.size(); i++) {
+        chainOrdering->push_back(false);
+    }
+
 
 }
 
-bool Player::isPairTripQuad(vector<Card> hand) {
+bool Player::isStraightFlush(vector<Card> hand) {
+    return isStraight(hand) && isFlush(hand);
+}
+
+bool Player::isFullHouse(vector<Card>) {
+    //if pair + threeOfKind return true
+    //else return false
+}
+
+int Player::isPairTripQuad(vector<Card> hand) {
     bool pair = false;
     bool twoPair = false;
     bool threeOfKind = false;

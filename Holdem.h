@@ -24,6 +24,7 @@ private:
     Player P4;
 
 public:
+
     HoldemGame();
 
     bool flop();
