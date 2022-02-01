@@ -38,4 +38,5 @@ void Player::setHandVal(int value) {
 void Player::evaluateHand(vector<Card> board) {
     //loop through the board to make a hand which will be set to a hand value
 
+
 }

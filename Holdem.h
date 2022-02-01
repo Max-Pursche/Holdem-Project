@@ -10,11 +10,12 @@
 #include <iostream>
 #include <vector>
 
+
 using namespace std;
 
 class HoldemGame {
 private:
-    enum pokerHands{LESSERCARD = 0, HIGHCARD = 1, PAIR = 2};
+
     std::vector<Card> const deck;
     std::vector<Card> cardsInPlay;
     Player P1;
