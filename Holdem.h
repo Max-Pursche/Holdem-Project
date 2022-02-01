@@ -14,8 +14,14 @@ using namespace std;
 
 class HoldemGame {
 private:
+    enum pokerHands{LESSERCARD = 0, HIGHCARD = 1, PAIR = 2};
     std::vector<Card> const deck;
+    std::vector<Card> cardsInPlay;
     Player P1;
+    Player P2;
+    Player P3;
+    Player P4;
+
 public:
     HoldemGame();
 
@@ -23,9 +29,21 @@ public:
 
     bool turn();
 
-    bool river();
+    void newHands();
 
-    static char getPlayerChoice(std::ostream &outs, std::istream &ins);
+    void clearCardsInPlay(vector<Card>);
+
+    static int getPlayerChoice(std::ostream &outs, std::istream &ins);
+
+    static char getUIChoice(std::ostream &outs, std::istream &ins);
+
+    void printCardsInPlay(std::ostream &outs);
+
+    void printPlayerHands(std::ostream &outs);
+
+    static void print_options(std::ostream &outs);
+
+    static void print_rules(std::ostream &outs);
 };
 
 

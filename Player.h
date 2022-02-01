@@ -11,10 +11,27 @@ using namespace std;
 
 class Player {
 private:
-    std::vector<Card> hand;
-
+    Card card1;
+    Card card2;
+    int handVal;
 public:
+    Player();
 
+    Player(Card, Card);
+
+    Card getCard1();
+
+    Card getCard2();
+
+    int getHandVal();
+
+    void setCard1(Card);
+
+    void setCard2(Card);
+
+    void setHandVal(int);
+
+    void evaluateHand(vector<Card>);
 };
 
 

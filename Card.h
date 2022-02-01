@@ -8,15 +8,14 @@
 class Card {
 private:
     enum Suit{ HEART = 1, CLUB = 2, SPADE = 3, DIAMOND = 4 };
-    enum Face{JACK = 11, QUEEN = 12, KING = 13, ACE = 1};
+    enum Face{ NOFACE = 10, JACK = 11, QUEEN = 12, KING = 13, ACE = 14};
     int value;
     Suit suitVal;
     Face faceVal;
 public:
-
     Card();
 
-    Card(int, Suit);
+    Card(int, int, int);
 
     int getValue();
 
@@ -29,7 +28,6 @@ public:
     void setSuitval(int);
 
     void setFacetval(int);
-
 };
 
 
