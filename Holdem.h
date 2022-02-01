@@ -10,7 +10,6 @@
 #include <iostream>
 #include <vector>
 
-
 using namespace std;
 
 class HoldemGame {
@@ -49,6 +48,5 @@ public:
 
     static void print_rules(std::ostream &outs);
 };
-
 
 #endif //OPEN_ENDED_PROJECT1_HOLDEM_H
