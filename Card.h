@@ -5,10 +5,12 @@
 #ifndef OPEN_ENDED_PROJECT1_CARD_H
 #define OPEN_ENDED_PROJECT1_CARD_H
 #include "vector"
+
+enum Suit{ HEART = 1, CLUB = 2, SPADE = 3, DIAMOND = 4 };
+enum Face{ NOFACE = 10, JACK = 11, QUEEN = 12, KING = 13, ACE = 14};
+
 class Card {
 private:
-    enum Suit{ HEART = 1, CLUB = 2, SPADE = 3, DIAMOND = 4 };
-    enum Face{ NOFACE = 10, JACK = 11, QUEEN = 12, KING = 13, ACE = 14};
     int value;
     Suit suitVal;
     Face faceVal;
@@ -25,9 +27,9 @@ public:
 
     void setValue(int);
 
-    void setSuitval(int);
+    void setSuitVal(int);
 
-    void setFacetval(int);
+    void setFaceVal(int);
 };
 
 
