@@ -6,36 +6,44 @@
 #include "Card.h"
 
 Player::Player(Card crd1, Card crd2) {
-    card1 = crd1;
-    card2 = crd2;
+    hand.card1 = crd1;
+    hand.card2 = crd2;
 }
 
 Card Player::getCard1() const {
-    return card1;
+    return hand.card1;
 }
 
 Card Player::getCard2() const {
-    return card2;
+    return hand.card2;
 }
 
 int Player::getHandVal() const {
-    return handVal;
+    return hand.handVal;
+}
+
+Hand Player::getHand() const{
+    return hand;
 }
 
 void Player::setCard1(Card crd) {
-    card1 = crd;
+    hand.card1 = crd;
 }
 
 void Player::setCard2(Card crd) {
-    card2 = crd;
+    hand.card2 = crd;
 }
 
 void Player::setHandVal(int value) {
-    handVal = value;
+    hand.handVal = value;
 }
 
+//void setHand(Card crd1, Card crd2, int value){
+//
+//}
+
 // sorts a vector in ascending order
-void Player::Sort(vector<Card> hand) {
+void Player::BubbleSort(vector<Card> hand) {
     for( size_t i = 0 ; i < hand.size(); ++i ) {
         for (size_t j = i + 1; j < hand.size(); ++j) {
             if (hand[i].getValue() > hand[j].getValue()) { //need to overload card operators for >,<,= function
@@ -52,13 +60,13 @@ void Player::evaluateHand(vector<Card> board) {
     //loop through the board to make a hand which will be set to a hand value,
     //want to make this organised from lowest to highest value for easier looping in isStraight
     vector<Card> fullHand;
-    fullHand.push_back(card1);
-    fullHand.push_back(card2);
-    for (int i = 0; i < board.size(); i++){
-        fullHand.push_back(board[i]);
+    fullHand.push_back(hand.card1);
+    fullHand.push_back(hand.card2);
+    for (auto & i : board) {
+        fullHand.push_back(i);
     }
     //sorting into ascending order 2 - 14
-    Sort(fullHand);
+    BubbleSort(fullHand);
     //checking and setting hand values
     if (isStraightFlush(fullHand)){
         setHandVal(9);
@@ -124,75 +132,60 @@ bool Player::isStraightFlush(vector<Card> hand) {
     return isStraight(hand) && isFlush(hand);
 }
 
-//split up
-int Player::isPairTripQuad(vector<Card> hand) {
-    //boolean values for the possible hand combinations
-    bool pair = false;
-    bool twoPair = false;
-    bool threeOfKind = false;
-    bool fourOfKind = false;
-    //Looping through the hand to check for occurrences of the same card
+bool isPair(vector<Card> hand) {
     int occurrences = 0;
     for (int i = 0; i < hand.size(); i++) {
         if (hand[i+1].getValue() == hand[i].getValue()) {
             occurrences++;
         }
         if (occurrences == 1){
-            pair = true;
+            return true;
         }
     }
+    return false;
+}
 
-    occurrences = 0;
+bool isTwoPair(vector<Card> hand) {
+    int occurrences = 0;
     for (int i = 0; i < hand.size(); i++) {
-        if (hand[i+1].getValue() == hand[i].getValue()) {
-            occurrences++;
-        }
-        if (occurrences == 2){
-            threeOfKind = true;
-        }
-    }
-
-    occurrences = 0;
-    for (int i = 0; i < hand.size(); i++) {
-        if (hand[i+1].getValue() == hand[i].getValue()) {
-            occurrences++;
-        }
-        if (occurrences == 3){
-            fourOfKind = true;
-        }
-    }
-
-    occurrences = 0;
-    for (int i = 0; i < hand.size(); i++) {
-        int pair1 = -1;
+        int pair1;
         if ((hand[i+1].getValue() == hand[i].getValue()) && (hand[i].getValue() != pair1)) {
             pair1 = hand[i].getValue();
             occurrences++;
         }
         if (occurrences == 2){
-            twoPair = true;
+            return true;
         }
     }
-    //returns the level of hand, 1 being highest and 5 being the lowest with 6 being if no hand was made
-    if (fourOfKind) {
-        return 1;
-    }
-    else if (pair && threeOfKind) {
-        //full house
-        return 2;
-    }
-    else if (threeOfKind) {
-        return 3;
-    }
-    else if (twoPair) {
-        return 4;
-    }
-    else if (pair) {
-        return 5;
-    }
-    else {
-        //if none are true then 6 is the value that none of them are set to true
-        return 6;
-    }
+    return false;
 }
 
+bool isTrips(vector<Card> hand){
+    int occurrences = 0;
+    for (int i = 0; i < hand.size(); i++) {
+        if (hand[i+1].getValue() == hand[i].getValue()) {
+            occurrences++;
+        }
+        if (occurrences == 2){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool isFullHouse(vector<Card> hand) {
+    return isPair(hand) && isTrips(hand);
+}
+
+bool isQuads(vector<Card> hand) {
+    int occurrences = 0;
+    for (int i = 0; i < hand.size(); i++) {
+        if (hand[i+1].getValue() == hand[i].getValue()) {
+            occurrences++;
+        }
+        if (occurrences == 3){
+            return true;
+        }
+    }
+    return false;
+}

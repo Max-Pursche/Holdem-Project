@@ -8,12 +8,15 @@
 #include "vector"
 
 using namespace std;
+struct Hand {
+    Card card1;
+    Card card2;
+    int handVal = 0;
+};
 
 class Player {
 private:
-    Card card1;
-    Card card2;
-    int handVal;
+    Hand hand;
 public:
     Player();
 
@@ -23,6 +26,8 @@ public:
 
     Card getCard2() const;
 
+    Hand getHand() const;
+
     int getHandVal() const;
 
     void setCard1(Card);
@@ -31,7 +36,7 @@ public:
 
     void setHandVal(int);
 
-    void Sort(vector<Card>);
+    static void BubbleSort(vector<Card>);
 
     void evaluateHand(vector<Card>);
 
@@ -41,9 +46,18 @@ public:
 
     bool isStraightFlush(vector<Card>);
 
+    bool isPairTripQuad(vector<Card>);
+
+    bool isPair(vector<Card>);
+
+    bool isTwoPair(vector<Card>);
+
+    bool isTrips(vector<Card>);
+
     bool isFullHouse(vector<Card>);
 
-    int isPairTripQuad(vector<Card>);
+    bool isQuads(vector<Card>);
+
 };
 
 
