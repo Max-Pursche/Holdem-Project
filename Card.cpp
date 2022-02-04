@@ -35,3 +35,17 @@ void Card::setValue(int intVal) {
     value = intVal;
 }
 
+bool operator >= (const Card& lhs, const Card& rhs) {
+    return lhs.getValue() >= rhs.getValue();
+}
+bool operator <= (const Card& lhs, const Card& rhs) {
+    return lhs.getValue() <= rhs.getValue();
+}
+
+bool operator > (const Card& lhs, const Card& rhs) {
+    return lhs.getValue() >= rhs.getValue();
+}
+
+bool operator < (const Card& lhs, const Card& rhs) {
+    return lhs.getValue() < rhs.getValue();
+}

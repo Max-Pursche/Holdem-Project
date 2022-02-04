@@ -36,6 +36,8 @@ public:
 
     void clearCardsInPlay(vector<Card>);
 
+    void createDeck();
+
     static int getPlayerChoice(std::ostream &outs, std::istream &ins);
 
     static char getUIChoice(std::ostream &outs, std::istream &ins);

@@ -68,9 +68,6 @@ void Player::evaluateHand(const vector<Card>& board) {
     BubbleSort(fullHand);
     //checking and setting hand values
     if (isStraightFlush(fullHand)){
-        setHandVal(10);
-    }
-    else if (isPairTripQuad(fullHand) == 1) {
         setHandVal(9);
     }
     else if (isQuads(fullHand)) {
