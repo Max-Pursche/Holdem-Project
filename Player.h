@@ -38,25 +38,23 @@ public:
 
     static void BubbleSort(vector<Card>);
 
-    void evaluateHand(vector<Card>);
+    void evaluateHand(const vector<Card>&);
 
-    bool isStraight(vector<Card>);
+    static bool isStraight(vector<Card>);
 
-    bool isFlush(vector<Card>);
+    static bool isFlush(vector<Card>);
 
-    bool isStraightFlush(vector<Card>);
+    static bool isStraightFlush(const vector<Card>&);
 
-    bool isPairTripQuad(vector<Card>);
+    static bool isPair(vector<Card>);
 
-    bool isPair(vector<Card>);
+    static bool isTwoPair(vector<Card>);
 
-    bool isTwoPair(vector<Card>);
+    static bool isTrips(vector<Card>);
 
-    bool isTrips(vector<Card>);
+    static bool isFullHouse(const vector<Card>&);
 
-    bool isFullHouse(vector<Card>);
-
-    bool isQuads(vector<Card>);
+    static bool isQuads(vector<Card>);
 
 };
 

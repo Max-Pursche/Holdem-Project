@@ -55,7 +55,7 @@ void Player::BubbleSort(vector<Card> hand) {
 }
 
 //straight flush is the highest hand I am going to add for now, maybe royal if I can finish this before sunday
-void Player::evaluateHand(vector<Card> board) {
+void Player::evaluateHand(const vector<Card>& board) {
     //loop through the board to make a hand which will be set to a hand value,
     //want to make this organised from lowest to highest value for easier looping in isStraight
     vector<Card> fullHand;
@@ -68,12 +68,15 @@ void Player::evaluateHand(vector<Card> board) {
     BubbleSort(fullHand);
     //checking and setting hand values
     if (isStraightFlush(fullHand)){
-        setHandVal(9);
+        setHandVal(10);
     }
     else if (isPairTripQuad(fullHand) == 1) {
+        setHandVal(9);
+    }
+    else if (isQuads(fullHand)) {
         setHandVal(8);
     }
-    else if (isPairTripQuad(fullHand) == 2){
+    else if (isFullHouse(fullHand)) {
         setHandVal(7);
     }
     else if (isFlush(fullHand)){
@@ -82,13 +85,13 @@ void Player::evaluateHand(vector<Card> board) {
     else if (isStraight(fullHand)){
         setHandVal(5);
     }
-    else if (isPairTripQuad(fullHand) == 3){
+    else if (isTrips(fullHand)){
         setHandVal(4);
     }
-    else if (isPairTripQuad(fullHand) == 4){
+    else if (isTwoPair(fullHand)){
         setHandVal(3);
     }
-    else if (isPairTripQuad(fullHand) == 5){
+    else if (isPair(fullHand)){
         setHandVal(2);
     }
     else{
@@ -126,12 +129,12 @@ bool Player::isStraight(vector<Card> hand) {
 }
 
 //checks for both true booleans for
-bool Player::isStraightFlush(vector<Card> hand) {
+bool Player::isStraightFlush(const vector<Card>& hand) {
     //checks boolean values of isStraight and isFlush
     return isStraight(hand) && isFlush(hand);
 }
 
-bool isPair(vector<Card> hand) {
+bool Player::isPair(vector<Card> hand) {
     int occurrences = 0;
     for (int i = 0; i < hand.size(); i++) {
         if (hand[i+1].getValue() == hand[i].getValue()) {
@@ -144,10 +147,10 @@ bool isPair(vector<Card> hand) {
     return false;
 }
 
-bool isTwoPair(vector<Card> hand) {
+bool Player::isTwoPair(vector<Card> hand) {
     int occurrences = 0;
     for (int i = 0; i < hand.size(); i++) {
-        int pair1;
+        int pair1 = -1;
         if ((hand[i+1].getValue() == hand[i].getValue()) && (hand[i].getValue() != pair1)) {
             pair1 = hand[i].getValue();
             occurrences++;
@@ -159,7 +162,7 @@ bool isTwoPair(vector<Card> hand) {
     return false;
 }
 
-bool isTrips(vector<Card> hand){
+bool Player::isTrips(vector<Card> hand){
     int occurrences = 0;
     for (int i = 0; i < hand.size(); i++) {
         if (hand[i+1].getValue() == hand[i].getValue()) {
@@ -172,11 +175,11 @@ bool isTrips(vector<Card> hand){
     return false;
 }
 
-bool isFullHouse(vector<Card> hand) {
+bool Player::isFullHouse(const vector<Card>& hand) {
     return isPair(hand) && isTrips(hand);
 }
 
-bool isQuads(vector<Card> hand) {
+bool Player::isQuads(vector<Card> hand) {
     int occurrences = 0;
     for (int i = 0; i < hand.size(); i++) {
         if (hand[i+1].getValue() == hand[i].getValue()) {
