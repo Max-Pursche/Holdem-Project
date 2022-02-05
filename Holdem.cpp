@@ -1,14 +1,34 @@
 //
 // Created by mrgat on 1/31/2022.
 //
-
+#include "time.h"
+#include "random"
 #include "Holdem.h"
-HoldemGame::HoldemGame() {
+HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
+    unique_ptr<vector<Card>> cardsInPlay = {};
+    char uiChice;
+    int playChoice;
+    int playerScore;
+    //init random seed
+    srand(time(NULL));
+    //create full deck of cards
+    createDeck(deck);
+    //add 4 players functionality
+    Player  player1(deck[rand()% 52 + 1], deck[rand()% 52 + 1]);
+    Player  player2(deck[rand()% 52 + 1], deck[rand()% 52 + 1]);
+    Player  player3(deck[rand()% 52 + 1], deck[rand()% 52 + 1]);
+    Player  player4(deck[rand()% 52 + 1], deck[rand()% 52 + 1]);
+    players.push_back(player1);
+    players.push_back(player2);
+    players.push_back(player3);
+    players.push_back(player4);
+
+    printRules(cout);
 
 }
 
-void HoldemGame::turn(Card card) {
-    cardsInPlay->push_back(card);
+void HoldemGame::turn(vector<Card> deck, vector<Card> cardsInPlay) {
+    cardsInPlay.push_back(deck[rand()% 52 + 1]);//pointer problems
 }
 
 Player HoldemGame::evaluatePlayers(vector<Player> tablePlayers, vector<Card> board) {
@@ -27,23 +47,23 @@ Player HoldemGame::evaluatePlayers(vector<Player> tablePlayers, vector<Card> boa
     return tablePlayers[0];
 }
 
-void HoldemGame::newHands(vector<Player> playerTable) {
+void HoldemGame::newHands(vector<Player> playerTable, vector<Card> deck) {
     for (int i = 0; i > playerTable.size(); i++){
         playerTable[i].setCard1(deck[rand()]);//how get inside scope of deck to refrence card type
-        playerTable[i].setCard1(deck[rand()]);
+        playerTable[i].setCard2(deck[rand()]);
     }
 }
 
-void HoldemGame::createDeck() {
+void HoldemGame::createDeck(vector<Card> deck) {
     for (int i = 0; i < 14; i++) {
         for (int j = 0; j < 4; j++) {
             if(i < 10) {
                 Card card(i, j, i);
-                deck->push_back(card);
+                deck.push_back(card);
             }
             else{
                 Card card(i, j, 0);
-                deck->push_back(card);
+                deck.push_back(card);
             }
         }
     }
@@ -55,9 +75,21 @@ void HoldemGame::clearCards(vector<Card> inPlay) {
     }
 }
 
-void HoldemGame::printCardsInPlay(std::ostream &outs) {
+void HoldemGame::printCardsInPlay(std::ostream &outs, ) {
     for (int i = 0; i > cardsInPlay->size(); i++){
-        outs << cardsInPlay[i];//printing??
+        outs << cardsInPlay[i];//printing?? "unique pointer does not provide a subscript editor"
+        if (i <players->size() - 1) {
+            outs << ", ";
+        }
+    }
+}
+
+void HoldemGame::printPlayerHands(std::ostream &outs) {
+    for (int i = 0; i > players->size(); i++){
+        outs << players[i];//printing??
+        if (i < players->size() - 1) {
+            outs << ", ";
+        }
     }
 }
 
@@ -67,15 +99,6 @@ int HoldemGame::getPlayerChoice(std::ostream &outs, std::istream &ins) {
 
 char HoldemGame::getUIChoice(std::ostream &outs, std::istream &ins) {
     outs << "(p) to play, (i) for info/rules, (h) for hand rankings, or (e) to exit: ";
-}
-
-void HoldemGame::printPlayerHands(std::ostream &outs) {
-    for (int i = 0; i > players->size(); i++){
-        outs << players[i];//printing??
-        if (i <players->size() - 1) {
-            outs << ", ";
-        }
-    }
 }
 
 void HoldemGame::printRules(std::ostream &outs) {
@@ -100,8 +123,5 @@ void HoldemGame::printHands(std::ostream &outs) {
     outs << "Three of a kind: #6" << endl;
     outs << "Two Pair: #7" << endl;
     outs << "Pair: #8" << endl;
-    outs << "High Card: #9" << endl;
+    outs << "High Card (Highest value card among players): #9" << endl;
 }
-
-
-

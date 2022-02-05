@@ -49,3 +49,34 @@ bool operator > (const Card& lhs, const Card& rhs) {
 bool operator < (const Card& lhs, const Card& rhs) {
     return lhs.getValue() < rhs.getValue();
 }
+
+std::ostream& operator << (std::ostream& outs, const Card &card) {
+    if (card.getFace() ==  NOFACE){
+        outs << card.getValue();
+    }
+    else if (card.getFace() == ACE) {
+        outs << "ACE";
+    }
+    else if (card.getFace() == KING) {
+        outs << "KING";
+    }
+    else if (card.getFace() == QUEEN) {
+        outs << "QUEEN";
+    }
+    else{
+        outs << "JACK";
+    }
+    if (card.getSuit() == HEART) {
+        outs << "of HEART";
+    }
+    else if (card.getSuit() == SPADE) {
+        outs << "of SPADE";
+    }
+    else if (card.getSuit() == DIAMOND) {
+        outs << "of DIAMOND";
+    }
+    else {
+        outs << "of CLUB";
+    }
+    return outs;
+}
