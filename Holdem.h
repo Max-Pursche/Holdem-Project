@@ -45,9 +45,9 @@ public:
 
     void printPlayerHands(std::ostream &outs);
 
-    static void print_options(std::ostream &outs);
+    static void printRules(std::ostream &outs);
 
-    static void print_rules(std::ostream &outs);
-};
+    void HoldemGame::printHands(std::ostream &outs);
 
+    };
 #endif //OPEN_ENDED_PROJECT1_HOLDEM_H
