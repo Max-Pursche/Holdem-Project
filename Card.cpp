@@ -31,7 +31,7 @@ void Card::setSuitVal(int intVal) {
     suitVal = Suit(intVal);
 }
 
-void Card::setValue(int intVal) {
+void Card::setValue(int intVal) {//wrking
     value = intVal;
 }
 

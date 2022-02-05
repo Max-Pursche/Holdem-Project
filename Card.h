@@ -8,8 +8,8 @@
 #include "istream"
 #include "ostream"
 
-enum Suit{ HEART = 1, CLUB = 2, SPADE = 3, DIAMOND = 4 };
-enum Face{NULLFACE = 0, JACK = 11, QUEEN = 12, KING = 13, ACE = 14};
+enum Suit{ HEART = 0, CLUB = 1, SPADE = 2, DIAMOND = 3};
+enum Face{NOFACE = 0, JACK = 11, QUEEN = 12, KING = 13, ACE = 14};
 
 class Card {
 private:
@@ -41,7 +41,6 @@ public:
     friend bool operator < (const Card& card1L, const Card& card2R);
 
     friend bool operator <= (const Card& card1L, const Card& card2R);
-
 
 };
 

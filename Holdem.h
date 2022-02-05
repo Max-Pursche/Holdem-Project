@@ -9,38 +9,37 @@
 #include "Player.h"
 #include <iostream>
 #include <vector>
+#include <memory>
 
 using namespace std;
 
 class HoldemGame {
 private:
     //need to init a Deck
-    std::vector<Card> const deck;
+    std::vector<Card>* deck;
     //
-    std::vector<Card> cardsInPlay;
-    //consdering making these guys in main and having them as parameters
-    Player P1;
-    Player P2;
-    Player P3;
-    Player P4;
-
+    std::vector<Card>* cardsInPlay;
+    //
+    std::vector<Player>* players;
 public:
 
     HoldemGame();
 
-    bool flop();
+    void turn(Card);
 
-    bool turn();
+    void newHands(vector<Player>);
 
-    void newHands();
+    Player evaluatePlayers(vector<Player>, vector<Card>);
 
-    void clearCardsInPlay(vector<Card>);
+    vector<Player> getPlayers();
 
     void createDeck();
 
     static int getPlayerChoice(std::ostream &outs, std::istream &ins);
 
     static char getUIChoice(std::ostream &outs, std::istream &ins);
+
+    void clearCards(vector<Card>);
 
     void printCardsInPlay(std::ostream &outs);
 
