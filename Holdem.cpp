@@ -14,8 +14,8 @@ HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
     srand(time(NULL));
     //create full deck of cards
     createDeck(deck);
+    vector<Card> mainDeck = deck;
     while (uiChoice != 'e') {
-        vector<Card> mainDeck = deck;
         //setting aspects of players
         //card 1
         for (int i = 0; i < players.size(); i++) {
@@ -122,7 +122,6 @@ void HoldemGame::newHands(vector<Player> playerTable, vector<Card> deck) {
         //generate int = rand() % deck.size + 1
         playerTable[i].setCard1(deck[rand()]);
         playerTable[i].setCard2(deck[rand()]);
-        //remove from deck
     }
 }
 
@@ -130,7 +129,7 @@ void HoldemGame::createDeck(vector<Card> deck) {
     for (int i = 0; i < 14; i++) {
         for (int j = 0; j < 4; j++) {
             //if card has a face value instead of number value
-            if(i < 10) {
+            if(i > 10) {
                 Card card(i, j, i);
                 deck.push_back(card);
             }
