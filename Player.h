@@ -63,4 +63,6 @@ public:
 
     friend std::ostream& operator << (std::ostream& outs, const Player &player);
 };
+
+
 #endif //OPEN_ENDED_PROJECT1_PLAYER_H

@@ -21,7 +21,7 @@ public:
 
     void newHands(vector<Player>, vector<Card>);
 
-    Player evaluatePlayers(vector<Player>, vector<Card>);
+    int evaluatePlayers(vector<Player>, vector<Card>);
 
     void createDeck(vector<Card> deck);
 

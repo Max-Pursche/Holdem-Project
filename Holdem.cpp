@@ -6,7 +6,7 @@
 #include "Holdem.h"
 
 HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
-    unique_ptr<vector<Card>> cardsInPlay = {};
+    vector<Card> cardsInPlay;
     char uiChoice = 'p';
     int playChoice;
     int playerScore = 0;
@@ -36,10 +36,33 @@ HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
         printRules(cout);
         uiChoice = getUIChoice(cout, cin);
         switch (uiChoice) {
+            //main game
             case 'p':
                 printPlayerHands(cout, players);
-                //get play options
-                //get player input
+                printPlayerOptions(cout);
+                playChoice = getPlayerChoice(cout, cin);
+                for (int i = 0; i < 2; i++){
+                    turn(mainDeck, cardsInPlay);
+                }
+                printCardsInPlay(cout, cardsInPlay);
+                printPlayerHands(cout, players);
+                cout << "The Turn" << endl;
+                turn(mainDeck, cardsInPlay);
+                printCardsInPlay(cout, cardsInPlay);
+                cout << "The River" << endl;
+                turn(mainDeck, cardsInPlay);
+                printCardsInPlay(cout, cardsInPlay);
+                if (playChoice == evaluatePlayers(players, cardsInPlay)) {
+                    playerScore += 5;
+                    cout << "You guessed right!\n+5 points\nYour Score:" << to_string(playerScore) << endl;
+                }
+                else if (playChoice == evaluatePlayers(players, cardsInPlay) - 1){
+                    playerScore += 2;
+                    cout << "You had the right idea... RIP\n+2 points\nYour Score:" << to_string(playerScore) << endl;
+                }
+                else {
+                    cout << "nice try, time to touch up your hand range sense!\n-2 points\nYour Score:" << to_string(playerScore) << endl;
+                }
             case 'i':
                 printRules(cout);
                 break;
@@ -52,23 +75,27 @@ HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
 
 void HoldemGame::turn(vector<Card> deck, vector<Card> cardsInPlay) {
     //gotta fix rand
-    cardsInPlay.push_back(deck[rand()% 52 + 1]);
+    int randGen = rand()% deck.size() + 1;
+    cardsInPlay.push_back(deck[randGen]);
+    removeCard(randGen, deck);
 }
 
-Player HoldemGame::evaluatePlayers(vector<Player> tablePlayers, vector<Card> board) {
+int HoldemGame::evaluatePlayers(vector<Player> tablePlayers, vector<Card> board) {
     //sorts the vector of players in descending order with highest hand first lowest hand last
     for (int i = 0; i > tablePlayers.size(); i++) {
         for (int j = i + 1; j < tablePlayers.size(); ++j) {
             tablePlayers[i].evaluateHand(board);
-            tablePlayers[i].evaluateHand(board);
+            tablePlayers[j].evaluateHand(board);
             if (tablePlayers[i].getHandVal() < tablePlayers[j].getHandVal()) {
                 Player temp = tablePlayers[i];
                 tablePlayers[i] = tablePlayers[j];
                 tablePlayers[j] = temp;
             }
+            //need a bubble sort else if statement for if the hands are equal and the value of the card needs to be compared
         }
     }
-    return tablePlayers[0];
+    //if statement depending on which player was chosen 1 2 3 or 4 depending on the player
+    return tablePlayers[0];//fixing
 }
 
 void HoldemGame::newHands(vector<Player> playerTable, vector<Card> deck) {

@@ -12,4 +12,5 @@ int main() {
     }
     HoldemGame game(deck, players);
 
+    return 0;
 }
