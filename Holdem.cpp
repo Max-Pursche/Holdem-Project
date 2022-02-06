@@ -4,6 +4,7 @@
 #include "time.h"
 #include "random"
 #include "Holdem.h"
+
 HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
     unique_ptr<vector<Card>> cardsInPlay = {};
     char uiChice;
@@ -11,11 +12,15 @@ HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
     int playerScore;
     //init random seed
     srand(time(NULL));
+
+
     //create full deck of cards
     createDeck(deck);
     vector<Card> mainDeck = deck;
     //add 4 players functionality
-    Player  player1(mainDeck[rand()% 52 + 1], mainDeck[rand()% 52 + 1]);
+    int randomGen = rand()% mainDeck.size() + 1;
+    int randomGen2 = rand()% mainDeck.size() + 1;
+    Player  player1(mainDeck[randomGen], mainDeck[randomGen2]);
     Player  player2(mainDeck[rand()% 52 + 1], mainDeck[rand()% 52 + 1]);
     Player  player3(mainDeck[rand()% 52 + 1], mainDeck[rand()% 52 + 1]);
     Player  player4(mainDeck[rand()% 52 + 1], mainDeck[rand()% 52 + 1]);
@@ -23,12 +28,15 @@ HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
     players.push_back(player2);
     players.push_back(player3);
     players.push_back(player4);
-
+    for (int i = 0; i < players.size(); i++) {
+        players[i].setName("Player" + to_string(i));
+    }
     printRules(cout);
 }
 
 void HoldemGame::turn(vector<Card> deck, vector<Card> cardsInPlay) {
-    cardsInPlay.push_back(deck[rand()% 52 + 1]);//pointer problems
+    //gotta fix rand
+    cardsInPlay.push_back(deck[rand()% 52 + 1]);
 }
 
 Player HoldemGame::evaluatePlayers(vector<Player> tablePlayers, vector<Card> board) {
@@ -49,14 +57,17 @@ Player HoldemGame::evaluatePlayers(vector<Player> tablePlayers, vector<Card> boa
 
 void HoldemGame::newHands(vector<Player> playerTable, vector<Card> deck) {
     for (int i = 0; i > playerTable.size(); i++){
+        //generate int = rand() % deck.size + 1
         playerTable[i].setCard1(deck[rand()]);
         playerTable[i].setCard2(deck[rand()]);
+        //remove from deck
     }
 }
 
 void HoldemGame::createDeck(vector<Card> deck) {
     for (int i = 0; i < 14; i++) {
         for (int j = 0; j < 4; j++) {
+            //if card has a face value instead of number value
             if(i < 10) {
                 Card card(i, j, i);
                 deck.push_back(card);
@@ -65,6 +76,17 @@ void HoldemGame::createDeck(vector<Card> deck) {
                 Card card(i, j, 0);
                 deck.push_back(card);
             }
+        }
+    }
+}
+
+void HoldemGame::removeCard(int index, vector<Card> deck){
+    //loop through vector of cards with index value from random generation
+    for(int i=0; i < deck.size();i++) {
+        //if the index value of the loop is equal to the index value generated
+        if(i == index) {
+            //remove the card from the deck at the index value
+            deck.erase(deck.begin() + i);
         }
     }
 }

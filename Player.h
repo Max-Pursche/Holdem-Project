@@ -19,6 +19,7 @@ private:
     string name;
     Hand hand;
 public:
+
     Player(Card, Card);
 
     Card getCard1() const;

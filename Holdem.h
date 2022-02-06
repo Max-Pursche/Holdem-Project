@@ -14,13 +14,6 @@
 using namespace std;
 
 class HoldemGame {
-private:
-//    //
-//    unique_ptr<> deck;
-//    //
-//    unique_ptr<vector<Card>> cardsInPlay;
-//    //
-//    unique_ptr<vector<Player>> players;
 public:
 
     HoldemGame(vector<Card>, vector<Player>);
@@ -32,6 +25,8 @@ public:
     Player evaluatePlayers(vector<Player>, vector<Card>);
 
     void createDeck(vector<Card> deck);
+
+    void removeCard(int, vector<Card>);
 
     static int getPlayerChoice(std::ostream &outs, std::istream &ins);
 

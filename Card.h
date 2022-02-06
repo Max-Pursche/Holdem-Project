@@ -43,8 +43,5 @@ public:
     friend bool operator <= (const Card& card1L, const Card& card2R);
 
     friend std::ostream& operator << (std::ostream& outs, const Card &card);
-
 };
-
-
 #endif //OPEN_ENDED_PROJECT1_CARD_H
