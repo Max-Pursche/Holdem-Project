@@ -3,6 +3,9 @@
 //
 
 #include "Player.h"
+Player::Player() {
+    setName("default");
+}
 
 Player::Player(Card crd1, Card crd2) {
     hand.card1 = crd1;

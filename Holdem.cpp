@@ -7,31 +7,40 @@
 
 HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
     unique_ptr<vector<Card>> cardsInPlay = {};
-    char uiChice;
+    char uiChoice = 'p';
     int playChoice;
-    int playerScore;
+    int playerScore = 0;
     //init random seed
     srand(time(NULL));
-
-
     //create full deck of cards
     createDeck(deck);
-    vector<Card> mainDeck = deck;
-    //add 4 players functionality
-    int randomGen = rand()% mainDeck.size() + 1;
-    int randomGen2 = rand()% mainDeck.size() + 1;
-    Player  player1(mainDeck[randomGen], mainDeck[randomGen2]);
-    Player  player2(mainDeck[rand()% 52 + 1], mainDeck[rand()% 52 + 1]);
-    Player  player3(mainDeck[rand()% 52 + 1], mainDeck[rand()% 52 + 1]);
-    Player  player4(mainDeck[rand()% 52 + 1], mainDeck[rand()% 52 + 1]);
-    players.push_back(player1);
-    players.push_back(player2);
-    players.push_back(player3);
-    players.push_back(player4);
-    for (int i = 0; i < players.size(); i++) {
-        players[i].setName("Player" + to_string(i));
+    while (uiChoice != 'e') {
+        vector<Card> mainDeck = deck;
+        //setting aspects of players
+        //card 1
+        for (int i = 0; i < players.size(); i++) {
+            int randGen = rand() % mainDeck.size() + 1;
+            players[i].setCard1(mainDeck[randGen]);
+            removeCard(randGen, mainDeck);
+        }
+        //card 2
+        for (int i = 0; i < players.size(); i++) {
+            int randGen = rand() % mainDeck.size() + 1;
+            players[i].setCard2(mainDeck[randGen]);
+            removeCard(randGen, mainDeck);
+        }
+        //Names for printing
+        for (int i = 0; i < players.size(); i++) {
+            players[i].setName("Player" + to_string(i));
+        }
+        printRules(cout);
+        uiChoice = getUIChoice(cout, cin);
+        switch (uiChoice) {
+            case 'p': ;
+            case 'i': ;
+            case 'h': ;
+        }
     }
-    printRules(cout);
 }
 
 void HoldemGame::turn(vector<Card> deck, vector<Card> cardsInPlay) {
@@ -80,11 +89,12 @@ void HoldemGame::createDeck(vector<Card> deck) {
     }
 }
 
-void HoldemGame::removeCard(int index, vector<Card> deck){
+//too complicated
+void HoldemGame::removeCard(int index1, vector<Card> deck){
     //loop through vector of cards with index value from random generation
     for(int i=0; i < deck.size();i++) {
         //if the index value of the loop is equal to the index value generated
-        if(i == index) {
+        if(i == index1) {
             //remove the card from the deck at the index value
             deck.erase(deck.begin() + i);
         }
@@ -116,11 +126,27 @@ void HoldemGame::printPlayerHands(std::ostream &outs, vector<Player> players) {
 }
 
 int HoldemGame::getPlayerChoice(std::ostream &outs, std::istream &ins) {
-    outs << "Press 1 to bet on P1, Press 2 to bet on P2, Press 3 to bet on P3, or Press 4 to bet on P4";
+    int choice;
+    printPlayerOptions(outs);
+    ins >> choice;
+    while (choice != 1 && choice !=  2 && choice != 3 && choice != 4) {
+        outs << endl << "Invalid option. " << endl;
+        printPlayerOptions(outs);
+        ins >> choice;
+    }
+    return choice;
 }
 
 char HoldemGame::getUIChoice(std::ostream &outs, std::istream &ins) {
-    outs << "(p) to play, (i) for info/rules, (h) for hand rankings, or (e) to exit: ";
+    char choice;
+    printUiOptions(outs);
+    ins >> choice;
+    while (choice != 's' && choice !=  'p' && choice != 'i' && choice != 'e') {
+        outs << endl << "Invalid option. " << endl;
+        printUiOptions(outs);
+        ins >> choice;
+    }
+    return choice;
 }
 
 void HoldemGame::printRules(std::ostream &outs) {
@@ -146,4 +172,12 @@ void HoldemGame::printHands(std::ostream &outs) {
     outs << "Two Pair: #7" << endl;
     outs << "Pair: #8" << endl;
     outs << "High Card (Highest value card among players): #9" << endl;
+}
+
+void HoldemGame::printPlayerOptions(std::ostream &outs) {
+    outs << "Press 1 to bet on P1, Press 2 to bet on P2, Press 3 to bet on P3, or Press 4 to bet on P4";
+}
+
+void  HoldemGame::printUiOptions(std::ostream &outs) {
+    outs << "(p) to play, (i) for info/rules, (h) for hand rankings, or (e) to exit: ";
 }

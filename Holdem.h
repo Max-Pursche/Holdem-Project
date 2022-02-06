@@ -15,7 +15,6 @@ using namespace std;
 
 class HoldemGame {
 public:
-
     HoldemGame(vector<Card>, vector<Player>);
 
     void turn(vector<Card>, vector<Card>);
@@ -28,9 +27,13 @@ public:
 
     void removeCard(int, vector<Card>);
 
-    static int getPlayerChoice(std::ostream &outs, std::istream &ins);
+    int getPlayerChoice(std::ostream &outs, std::istream &ins);
 
-    static char getUIChoice(std::ostream &outs, std::istream &ins);
+    void printPlayerOptions(std::ostream &outs);
+
+    char getUIChoice(std::ostream &outs, std::istream &ins);
+
+    void printUiOptions(std::ostream &outs);
 
     void clearCards(vector<Card>);
 
