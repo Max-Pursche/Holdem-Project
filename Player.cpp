@@ -17,6 +17,10 @@ Card Player::getCard2() const {
     return hand.card2;
 }
 
+string Player::getName() const {
+    return name;
+}
+
 int Player::getHandVal() const {
     return hand.handVal;
 }
@@ -33,13 +37,13 @@ void Player::setCard2(Card crd) {
     hand.card2 = crd;
 }
 
+void Player::setName(string nme) {
+    name = nme;
+}
+
 void Player::setHandVal(int value) {
     hand.handVal = value;
 }
-
-//void setHand(Card crd1, Card crd2, int value){
-//
-//}
 
 // sorts a vector in ascending order
 void Player::BubbleSort(vector<Card> hand) {
@@ -187,4 +191,8 @@ bool Player::isQuads(vector<Card> hand) {
         }
     }
     return false;
+}
+
+std::ostream& operator << (std::ostream& outs, const Player &player) {
+    outs << player.getName() << "'s hand:" << player.getCard1() << " , " << player.getCard2() << endl;
 }

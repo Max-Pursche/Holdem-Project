@@ -9,22 +9,23 @@
 
 using namespace std;
 struct Hand {
-    Card card1;
-    Card card2;
+    Card card1;//
+    Card card2;//
     int handVal = 0;
 };
 
 class Player {
 private:
+    string name;
     Hand hand;
 public:
-    Player();
-
     Player(Card, Card);
 
     Card getCard1() const;
 
     Card getCard2() const;
+
+    string getName() const;
 
     Hand getHand() const;
 
@@ -33,6 +34,8 @@ public:
     void setCard1(Card);
 
     void setCard2(Card);
+
+    void setName(string);
 
     void setHandVal(int);
 
@@ -56,6 +59,7 @@ public:
 
     static bool isQuads(vector<Card>);
 
+    friend std::ostream& operator << (std::ostream& outs, const Player &player);
 };
 
 

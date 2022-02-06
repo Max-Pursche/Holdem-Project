@@ -3,6 +3,11 @@
 //
 
 #include "Card.h"
+Card::Card() {
+    value = 0;
+    suitVal = Suit(0);
+    faceVal = Face(0);
+}
 
 Card::Card(int intVal, int suit, int face) {
     value = intVal;

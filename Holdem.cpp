@@ -13,18 +13,18 @@ HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
     srand(time(NULL));
     //create full deck of cards
     createDeck(deck);
+    vector<Card> mainDeck = deck;
     //add 4 players functionality
-    Player  player1(deck[rand()% 52 + 1], deck[rand()% 52 + 1]);
-    Player  player2(deck[rand()% 52 + 1], deck[rand()% 52 + 1]);
-    Player  player3(deck[rand()% 52 + 1], deck[rand()% 52 + 1]);
-    Player  player4(deck[rand()% 52 + 1], deck[rand()% 52 + 1]);
+    Player  player1(mainDeck[rand()% 52 + 1], mainDeck[rand()% 52 + 1]);
+    Player  player2(mainDeck[rand()% 52 + 1], mainDeck[rand()% 52 + 1]);
+    Player  player3(mainDeck[rand()% 52 + 1], mainDeck[rand()% 52 + 1]);
+    Player  player4(mainDeck[rand()% 52 + 1], mainDeck[rand()% 52 + 1]);
     players.push_back(player1);
     players.push_back(player2);
     players.push_back(player3);
     players.push_back(player4);
 
     printRules(cout);
-
 }
 
 void HoldemGame::turn(vector<Card> deck, vector<Card> cardsInPlay) {
@@ -49,7 +49,7 @@ Player HoldemGame::evaluatePlayers(vector<Player> tablePlayers, vector<Card> boa
 
 void HoldemGame::newHands(vector<Player> playerTable, vector<Card> deck) {
     for (int i = 0; i > playerTable.size(); i++){
-        playerTable[i].setCard1(deck[rand()]);//how get inside scope of deck to refrence card type
+        playerTable[i].setCard1(deck[rand()]);
         playerTable[i].setCard2(deck[rand()]);
     }
 }
@@ -75,19 +75,19 @@ void HoldemGame::clearCards(vector<Card> inPlay) {
     }
 }
 
-void HoldemGame::printCardsInPlay(std::ostream &outs, ) {
-    for (int i = 0; i > cardsInPlay->size(); i++){
-        outs << cardsInPlay[i];//printing?? "unique pointer does not provide a subscript editor"
-        if (i <players->size() - 1) {
+void HoldemGame::printCardsInPlay(std::ostream &outs, vector<Card> cardsInPlay) {
+    for (int i = 0; i > cardsInPlay.size(); i++){
+        outs << cardsInPlay[i];
+        if (i < cardsInPlay.size() - 1) {
             outs << ", ";
         }
     }
 }
 
-void HoldemGame::printPlayerHands(std::ostream &outs) {
-    for (int i = 0; i > players->size(); i++){
-        outs << players[i];//printing??
-        if (i < players->size() - 1) {
+void HoldemGame::printPlayerHands(std::ostream &outs, vector<Player> players) {
+    for (int i = 0; i > players.size(); i++){
+        outs << players[i];
+        if (i < players.size() - 1) {
             outs << ", ";
         }
     }

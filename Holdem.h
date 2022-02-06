@@ -39,9 +39,9 @@ public:
 
     void clearCards(vector<Card>);
 
-    void printCardsInPlay(std::ostream &outs);
+    void printCardsInPlay(std::ostream &outs, vector<Card>);
 
-    void printPlayerHands(std::ostream &outs);
+    void printPlayerHands(std::ostream &outs, vector<Player>);
 
     static void printRules(std::ostream &outs);
 
