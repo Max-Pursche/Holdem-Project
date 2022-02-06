@@ -11,6 +11,5 @@ int main() {
         players.push_back(Player());
     }
     HoldemGame game(deck, players);
-
     return 0;
 }

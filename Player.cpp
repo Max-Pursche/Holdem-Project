@@ -87,6 +87,7 @@ void Player::evaluateHand(const vector<Card>& board) {
         setHandVal(6);
     }
     else if (isStraight(fullHand)){
+        //need to save the value of the higher straight****
         setHandVal(5);
     }
     else if (isTrips(fullHand)){
@@ -119,6 +120,7 @@ bool Player::isFlush(vector<Card> hand) {
 }
 
 bool Player::isStraight(vector<Card> hand) {
+    //Straight value implementation
     int ordering;
     //looping through a sorted list of cards in ascending int value 2 - 14(Ace)
     for (int i = 0; i < hand.size(); i++) {

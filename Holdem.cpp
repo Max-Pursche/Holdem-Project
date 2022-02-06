@@ -60,8 +60,11 @@ HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
                     playerScore += 2;
                     cout << "You had the right idea... RIP\n+2 points\nYour Score:" << to_string(playerScore) << endl;
                 }
-                else {
+                else if(playerScore != 0) {
                     cout << "nice try, time to touch up your hand range sense!\n-2 points\nYour Score:" << to_string(playerScore) << endl;
+                }
+                else{
+                    cout << "Only place from the bottom is up!\nYour Score:" << to_string(playerScore) << endl;
                 }
             case 'i':
                 printRules(cout);
@@ -74,7 +77,6 @@ HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
 }
 
 void HoldemGame::turn(vector<Card> deck, vector<Card> cardsInPlay) {
-    //gotta fix rand
     int randGen = rand()% deck.size() + 1;
     cardsInPlay.push_back(deck[randGen]);
     removeCard(randGen, deck);
@@ -91,11 +93,28 @@ int HoldemGame::evaluatePlayers(vector<Player> tablePlayers, vector<Card> board)
                 tablePlayers[i] = tablePlayers[j];
                 tablePlayers[j] = temp;
             }
-            //need a bubble sort else if statement for if the hands are equal and the value of the card needs to be compared
+            //need a bubble sort else if statement for if the hands are equal and the value of the card needs to be compared aka look for high card
+//            else if (tablePlayers[i].getHandVal() == tablePlayers[j].getHandVal()) {
+//                if (tablePlayers[i].getCard1() < tablePlayers[j].getCard1() && tablePlayers[i].getCard1() < tablePlayers[j].getCard1()) {
+//
+//                }
+//
+//            }
         }
     }
-    //if statement depending on which player was chosen 1 2 3 or 4 depending on the player
-    return tablePlayers[0];//fixing
+    //if statement depending on which player won, returning 1 2 3 or 4 depending on the number the player input
+    if (tablePlayers[0].getName() == "Player1" ){
+        return 1;
+    }
+    else if (tablePlayers[0].getName() == "Player2" ) {
+        return 2;
+    }
+    else if (tablePlayers[0].getName() == "Player3" ) {
+        return 3;
+    }
+    else if (tablePlayers[0].getName() == "Player4" ) {
+        return 4;
+    }
 }
 
 void HoldemGame::newHands(vector<Player> playerTable, vector<Card> deck) {
@@ -175,7 +194,7 @@ char HoldemGame::getUIChoice(std::ostream &outs, std::istream &ins) {
     char choice;
     printUiOptions(outs);
     ins >> choice;
-    while (choice != 's' && choice !=  'p' && choice != 'i' && choice != 'e') {
+    while (choice != 'p' && choice !=  'i' && choice != 'h' && choice != 'e') {
         outs << endl << "Invalid option. " << endl;
         printUiOptions(outs);
         ins >> choice;
@@ -209,7 +228,7 @@ void HoldemGame::printHands(std::ostream &outs) {
 }
 
 void HoldemGame::printPlayerOptions(std::ostream &outs) {
-    outs << "Press 1 to bet on P1, Press 2 to bet on P2, Press 3 to bet on P3, or Press 4 to bet on P4";
+    outs << "Press (1) to bet on P1. Press (2) to bet on P2. Press (3) to bet on P3. or Press (4) to bet on P4";
 }
 
 void  HoldemGame::printUiOptions(std::ostream &outs) {
