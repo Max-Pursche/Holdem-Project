@@ -5,16 +5,28 @@
 #include "random"
 #include "Holdem.h"
 
-HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
-    vector<Card> cardsInPlay;
+HoldemGame::HoldemGame() {
+
+}
+
+void HoldemGame::runGame() {
+    std::vector<Player> players;
+    std::vector<Card> cardsInPlay;
+    std::vector<Card> deck;
     char uiChoice = 'p';
-    int playChoice;
+    int playChoice = 0;
     int playerScore = 0;
     //init random seed
     srand(time(NULL));
+    //init players
+    for (int i = 0; i < 4; i++) {
+        Player player;
+        players.push_back(Player());
+    }
     //create full deck of cards
     createDeck(deck);
-    vector<Card> mainDeck = deck;
+    std::vector<Card> mainDeck = deck;
+    printRules(cout);
     while (uiChoice != 'e') {
         //setting aspects of players
         //card 1
@@ -33,7 +45,6 @@ HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
         for (int i = 0; i < players.size(); i++) {
             players[i].setName("Player" + to_string(i));
         }
-        printRules(cout);
         uiChoice = getUIChoice(cout, cin);
         switch (uiChoice) {
             //main game
@@ -45,13 +56,14 @@ HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
                     turn(mainDeck, cardsInPlay);
                 }
                 printCardsInPlay(cout, cardsInPlay);
-                printPlayerHands(cout, players);
                 cout << "The Turn" << endl;
                 turn(mainDeck, cardsInPlay);
                 printCardsInPlay(cout, cardsInPlay);
                 cout << "The River" << endl;
                 turn(mainDeck, cardsInPlay);
                 printCardsInPlay(cout, cardsInPlay);
+                printPlayerHands(cout, players);
+                clearCards(cardsInPlay);
                 if (playChoice == evaluatePlayers(players, cardsInPlay)) {
                     playerScore += 5;
                     cout << "You guessed right!\n+5 points\nYour Score:" << to_string(playerScore) << endl;
@@ -66,6 +78,7 @@ HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
                 else{
                     cout << "Only place from the bottom is up!\nYour Score:" << to_string(playerScore) << endl;
                 }
+                break;
             case 'i':
                 printRules(cout);
                 break;
@@ -117,31 +130,18 @@ int HoldemGame::evaluatePlayers(vector<Player> tablePlayers, vector<Card> board)
     }
 }
 
-void HoldemGame::newHands(vector<Player> playerTable, vector<Card> deck) {
-    for (int i = 0; i > playerTable.size(); i++){
-        //generate int = rand() % deck.size + 1
-        playerTable[i].setCard1(deck[rand()]);
-        playerTable[i].setCard2(deck[rand()]);
-    }
-}
-
-void HoldemGame::createDeck(vector<Card> deck) {
-    for (int i = 0; i < 14; i++) {
-        for (int j = 0; j < 4; j++) {
+void HoldemGame::createDeck(vector<Card> &deck) {
+    Card card;
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 13; j++) {
             //if card has a face value instead of number value
-            if(i > 10) {
-                Card card(i, j, i);
-                deck.push_back(card);
-            }
-            else{
-                Card card(i, j, 0);
-                deck.push_back(card);
-            }
+            card.setValue(j);
+            card.setSuitVal(i);
+            deck.push_back(card);
         }
     }
 }
 
-//too complicated
 void HoldemGame::removeCard(int index1, vector<Card> deck){
     //loop through vector of cards with index value from random generation
     for(int i=0; i < deck.size();i++) {
@@ -169,8 +169,8 @@ void HoldemGame::printCardsInPlay(std::ostream &outs, vector<Card> cardsInPlay) 
 }
 
 void HoldemGame::printPlayerHands(std::ostream &outs, vector<Player> players) {
-    for (int i = 0; i > players.size(); i++){
-        outs << players[i];
+    for (int i = 0; i < players.size(); i++){
+        outs << players[i] << endl;
         if (i < players.size() - 1) {
             outs << ", ";
         }

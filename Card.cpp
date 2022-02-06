@@ -4,19 +4,13 @@
 
 #include "Card.h"
 Card::Card() {
-    value = 0;
+    value = Value(0);
     suitVal = Suit(0);
-    faceVal = Face(0);
 }
 
-Card::Card(int intVal, int suit, int face) {
-    value = intVal;
+Card::Card(int intVal, int suit) {
+    value = Value(intVal);
     suitVal = Suit(suit);
-    faceVal = Face(face);
-}
-
-Face Card::getFace() const {
-    return faceVal;
 }
 
 Suit Card::getSuit() const {
@@ -27,17 +21,12 @@ int Card::getValue() const  {
     return value;
 }
 
-void Card::setFaceVal(int intVal) {
-    faceVal = Face(intVal);
-    setValue(Face(intVal));
-}
-
 void Card::setSuitVal(int intVal) {
     suitVal = Suit(intVal);
 }
 
-void Card::setValue(int intVal) {//wrking
-    value = intVal;
+void Card::setValue(int intVal) {
+    value = Value(intVal);
 }
 
 bool operator >= (const Card& lhs, const Card& rhs) {
@@ -56,32 +45,56 @@ bool operator < (const Card& lhs, const Card& rhs) {
 }
 
 std::ostream& operator << (std::ostream& outs, const Card &card) {
-    if (card.getFace() ==  NOFACE){
-        outs << card.getValue();
-    }
-    else if (card.getFace() == ACE) {
+    if (card.getValue()== ACE) {
         outs << "ACE";
     }
-    else if (card.getFace() == KING) {
+    else if (card.getValue() == KING) {
         outs << "KING";
     }
-    else if (card.getFace() == QUEEN) {
+    else if (card.getValue() == QUEEN) {
         outs << "QUEEN";
     }
-    else{
+    else if (card.getValue() == JACK) {
         outs << "JACK";
     }
+    else if (card.getValue() == TEN) {
+        outs << "TEN";
+    }
+    else if (card.getValue() == NINE) {
+        outs << "NINE";
+    }
+    else if (card.getValue() == EIGHT) {
+        outs << "EIGHT";
+    }
+    else if (card.getValue() == SEVEN) {
+        outs << "SEVEN";
+    }
+    else if (card.getValue() == SIX) {
+        outs << "SIX";
+    }
+    else if (card.getValue() == FIVE) {
+        outs << "FIVE";
+    }
+    else if (card.getValue() == FOUR) {
+        outs << "FOUR";
+    }
+    else if (card.getValue() == THREE) {
+        outs << "THREE";
+    }
+    else{
+        outs << "TWO";
+    }
     if (card.getSuit() == HEART) {
-        outs << "of HEART";
+        outs << "of HEARTS";
     }
     else if (card.getSuit() == SPADE) {
-        outs << "of SPADE";
+        outs << "of SPADES";
     }
     else if (card.getSuit() == DIAMOND) {
-        outs << "of DIAMOND";
+        outs << "of DIAMONDS";
     }
     else {
-        outs << "of CLUB";
+        outs << "of CLUBS";
     }
     return outs;
 }

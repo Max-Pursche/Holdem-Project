@@ -15,17 +15,19 @@ using namespace std;
 
 class HoldemGame {
 public:
-    HoldemGame(vector<Card>, vector<Player>);
+    HoldemGame();
 
-    void turn(vector<Card>, vector<Card>);
+    void runGame();
 
-    void newHands(vector<Player>, vector<Card>);
+    void turn(std::vector<Card>,std::vector<Card>);
 
-    int evaluatePlayers(vector<Player>, vector<Card>);
+    void newHands(std::vector<Player>, std::vector<Card>);
 
-    void createDeck(vector<Card> deck);
+    int evaluatePlayers(std::vector<Player>,std::vector<Card>);
 
-    void removeCard(int, vector<Card>);
+    void createDeck(std::vector<Card> &deck);
+
+    void removeCard(int, std::vector<Card>);
 
     int getPlayerChoice(std::ostream &outs, std::istream &ins);
 
@@ -35,11 +37,11 @@ public:
 
     void printUiOptions(std::ostream &outs);
 
-    void clearCards(vector<Card>);
+    void clearCards(std::vector<Card>);
 
-    void printCardsInPlay(std::ostream &outs, vector<Card>);
+    void printCardsInPlay(std::ostream &outs, std::vector<Card>);
 
-    void printPlayerHands(std::ostream &outs, vector<Player>);
+    void printPlayerHands(std::ostream &outs, std::vector<Player>);
 
     static void printRules(std::ostream &outs);
 
