@@ -36,9 +36,16 @@ HoldemGame::HoldemGame(vector<Card> deck, vector<Player> players) {
         printRules(cout);
         uiChoice = getUIChoice(cout, cin);
         switch (uiChoice) {
-            case 'p': ;
-            case 'i': ;
-            case 'h': ;
+            case 'p':
+                printPlayerHands(cout, players);
+                //get play options
+                //get player input
+            case 'i':
+                printRules(cout);
+                break;
+            case 'h':
+                printHands(cout);
+                break;
         }
     }
 }
