@@ -30,6 +30,7 @@ void HoldemGame::runGame() {
     while (uiChoice != 'e') {
         //init main deck
         std::vector<Card> mainDeck = deck;
+        cardsInPlay = {};
         //setting aspects of players
         //card 1
         for (int i = 0; i < players.size(); i++) {
@@ -47,6 +48,7 @@ void HoldemGame::runGame() {
         for (int i = 1; i < players.size()+ 1; i++) {
             players[i - 1].setName("Player " + to_string(i));
         }
+        //opening loop for game
         uiChoice = getUIChoice(cout, cin);
         switch (uiChoice) {
             //main game
@@ -84,15 +86,14 @@ void HoldemGame::runGame() {
                 cardsInPlay.push_back(deck[randGen]);
                 removeCard(randGen, deck);
 
-
-                evaluation = 0;
                 evaluation = evaluatePlayers(players, cardsInPlay);
-                //scoring player choice
+                //Checking if Player Choice is equal to the evaluation of the players
                 if (playChoice == evaluation) {
                     playerScore += 5;
                     cout << "You guessed right!\n+5 points\nYour Score:" << to_string(playerScore) << endl;
                 }
-                else if (playChoice == (evaluation - 1)) {
+                else if (playChoice == 2) {
+                    //(evaluation - 1)
                     playerScore += 2;
                     cout << "You had the right idea..\n+2 points\nYour Score:" << to_string(playerScore) << endl;
                 }
@@ -102,7 +103,6 @@ void HoldemGame::runGame() {
                 else {
                     cout << "Only place from the bottom is up!\nYour Score:" << to_string(playerScore) << endl;
                 }
-                clearCards(cardsInPlay);
                 break;
             case 'i':
                 printRules(cout);
@@ -171,21 +171,6 @@ void HoldemGame::removeCard(int index1, vector<Card> deck){
         if(i == index1) {
             //remove the card from the deck at the index value
             deck.erase(deck.begin() + i);
-        }
-    }
-}
-
-void HoldemGame::clearCards(vector<Card> inPlay) {
-    for (int i = 0; i > inPlay.size(); i++) {
-        inPlay.erase(inPlay.begin());
-    }
-}
-
-void HoldemGame::printCardsInPlay(std::ostream &outs, vector<Card> cardsInPlay) {
-    for (int i = 0; i > cardsInPlay.size(); i++){
-        outs << cardsInPlay[i];
-        if (i < cardsInPlay.size() - 1) {
-            outs << ", ";
         }
     }
 }

@@ -48,11 +48,10 @@ void Player::setHandVal(HandValue value) {
     hand.handVal = value;
 }
 
-// sorts a vector in ascending order
 vector<Card> Player::BubbleSort(vector<Card> handCrds) {
     for( int i = 0 ; i < handCrds.size(); ++i ) {
         for (int j = i + 1; j < handCrds.size(); ++j) {
-            if (handCrds[i].getValue() > handCrds[j].getValue()) { //need to overload card operators for >,<,= function
+            if (handCrds[i].getValue() > handCrds[j].getValue()) {
                 Card temp = handCrds[i];
                 handCrds[i] = handCrds[j];
                 handCrds[j] = temp;
@@ -69,11 +68,6 @@ void Player::evaluateHand(vector<Card> board) {
     vector<Card> fullHand;
     board.push_back(hand.card1);
     board.push_back(hand.card2);
-//    fullHand.push_back(hand.card1);
-//    fullHand.push_back(hand.card2);
-//    for (auto & i : board) {
-//        fullHand.push_back(i);
-//    }
     //sorting into ascending order 0 - 12
     fullHand = BubbleSort(board);
     //checking and setting hand values
@@ -137,7 +131,7 @@ bool Player::isStraight(vector<Card>& hand) {
     return false;
 }
 
-//checks for both true booleans for
+//checks for both true booleans
 bool Player::isStraightFlush( vector<Card>& hand) {
     //checks boolean values of isStraight and isFlush
     return isStraight(hand) && isFlush(hand);
