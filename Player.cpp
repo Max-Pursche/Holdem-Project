@@ -44,67 +44,70 @@ void Player::setName(string nme) {
     name = nme;
 }
 
-void Player::setHandVal(int value) {
+void Player::setHandVal(HandValue value) {
     hand.handVal = value;
 }
 
 // sorts a vector in ascending order
-void Player::BubbleSort(vector<Card> hand) {
-    for( size_t i = 0 ; i < hand.size(); ++i ) {
-        for (size_t j = i + 1; j < hand.size(); ++j) {
-            if (hand[i].getValue() > hand[j].getValue()) { //need to overload card operators for >,<,= function
-                Card temp = hand[i];
-                hand[i] = hand[j];
-                hand[j] = temp;
+vector<Card> Player::BubbleSort(vector<Card> handCrds) {
+    for( int i = 0 ; i < handCrds.size(); ++i ) {
+        for (int j = i + 1; j < handCrds.size(); ++j) {
+            if (handCrds[i].getValue() > handCrds[j].getValue()) { //need to overload card operators for >,<,= function
+                Card temp = handCrds[i];
+                handCrds[i] = handCrds[j];
+                handCrds[j] = temp;
             }
         }
     }
+    return handCrds;
 }
 
 //straight flush is the highest hand I am going to add for now, maybe royal if I can finish this before sunday
-void Player::evaluateHand(const vector<Card>& board) {
+void Player::evaluateHand(vector<Card> board) {
     //loop through the board to make a hand which will be set to a hand value,
     //want to make this organised from lowest to highest value for easier looping in isStraight
     vector<Card> fullHand;
-    fullHand.push_back(hand.card1);
-    fullHand.push_back(hand.card2);
-    for (auto & i : board) {
-        fullHand.push_back(i);
-    }
-    //sorting into ascending order 2 - 14
-    BubbleSort(fullHand);
+    board.push_back(hand.card1);
+    board.push_back(hand.card2);
+//    fullHand.push_back(hand.card1);
+//    fullHand.push_back(hand.card2);
+//    for (auto & i : board) {
+//        fullHand.push_back(i);
+//    }
+    //sorting into ascending order 0 - 12
+    fullHand = BubbleSort(board);
     //checking and setting hand values
     if (isStraightFlush(fullHand)){
-        setHandVal(9);
+        setHandVal(STRAIGHTFLUSH);
     }
     else if (isQuads(fullHand)) {
-        setHandVal(8);
+        setHandVal(FOUROFKIND);
     }
     else if (isFullHouse(fullHand)) {
-        setHandVal(7);
+        setHandVal(FULLHOUSE);
     }
     else if (isFlush(fullHand)){
-        setHandVal(6);
+        setHandVal(FLUSH);
     }
     else if (isStraight(fullHand)){
         //need to save the value of the higher straight****
-        setHandVal(5);
+        setHandVal(STRAIGHT);
     }
     else if (isTrips(fullHand)){
-        setHandVal(4);
+        setHandVal(THREEOFKIND);
     }
     else if (isTwoPair(fullHand)){
-        setHandVal(3);
+        setHandVal(TWOPAIR);
     }
     else if (isPair(fullHand)){
-        setHandVal(2);
+        setHandVal(PAIR);
     }
     else{
-        setHandVal(1);
+        setHandVal(HIGH);
     }
 }
 
-bool Player::isFlush(vector<Card> hand) {
+bool Player::isFlush(vector<Card>& hand) {
     int flushCrit = 0;
     for (int i = 0; i < hand.size(); i++) {
         if (hand[i].getSuit() == hand[i+1].getSuit()){
@@ -119,9 +122,9 @@ bool Player::isFlush(vector<Card> hand) {
     }
 }
 
-bool Player::isStraight(vector<Card> hand) {
+bool Player::isStraight(vector<Card>& hand) {
     //Straight value implementation
-    int ordering;
+    int ordering = 0;
     //looping through a sorted list of cards in ascending int value 2 - 14(Ace)
     for (int i = 0; i < hand.size(); i++) {
         if (hand[i+1].getValue() == hand[i].getValue() + 1) {
@@ -135,12 +138,12 @@ bool Player::isStraight(vector<Card> hand) {
 }
 
 //checks for both true booleans for
-bool Player::isStraightFlush(const vector<Card>& hand) {
+bool Player::isStraightFlush( vector<Card>& hand) {
     //checks boolean values of isStraight and isFlush
     return isStraight(hand) && isFlush(hand);
 }
 
-bool Player::isPair(vector<Card> hand) {
+bool Player::isPair(vector<Card>& hand) {
     int occurrences = 0;
     for (int i = 0; i < hand.size(); i++) {
         if (hand[i+1].getValue() == hand[i].getValue()) {
@@ -153,7 +156,7 @@ bool Player::isPair(vector<Card> hand) {
     return false;
 }
 
-bool Player::isTwoPair(vector<Card> hand) {
+bool Player::isTwoPair(vector<Card>& hand) {
     int occurrences = 0;
     for (int i = 0; i < hand.size(); i++) {
         int pair1 = -1;
@@ -168,7 +171,7 @@ bool Player::isTwoPair(vector<Card> hand) {
     return false;
 }
 
-bool Player::isTrips(vector<Card> hand){
+bool Player::isTrips(vector<Card>& hand){
     int occurrences = 0;
     for (int i = 0; i < hand.size(); i++) {
         if (hand[i+1].getValue() == hand[i].getValue()) {
@@ -181,11 +184,11 @@ bool Player::isTrips(vector<Card> hand){
     return false;
 }
 
-bool Player::isFullHouse(const vector<Card>& hand) {
+bool Player::isFullHouse(vector<Card>& hand) {
     return isPair(hand) && isTrips(hand);
 }
 
-bool Player::isQuads(vector<Card> hand) {
+bool Player::isQuads(vector<Card>& hand) {
     int occurrences = 0;
     for (int i = 0; i < hand.size(); i++) {
         if (hand[i+1].getValue() == hand[i].getValue()) {
@@ -198,6 +201,6 @@ bool Player::isQuads(vector<Card> hand) {
     return false;
 }
 
-std::ostream& operator << (std::ostream& outs, const Player &player) {
+std::ostream& operator << (std::ostream& outs, const Player& player) {
     outs << player.getName() << "'s hand:" << player.getCard1() << " , " << player.getCard2() << endl;
 }

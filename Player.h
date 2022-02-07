@@ -8,10 +8,11 @@
 #include "vector"
 
 using namespace std;
+enum HandValue{HIGH = 0, PAIR = 1, TWOPAIR = 2, THREEOFKIND = 3, STRAIGHT = 4, FLUSH = 5, FULLHOUSE = 6, FOUROFKIND = 7, STRAIGHTFLUSH = 8};
 struct Hand {
     Card card1;//
     Card card2;//
-    int handVal = 0;
+    HandValue handVal = HIGH;
 };
 
 class Player {
@@ -39,27 +40,27 @@ public:
 
     void setName(string);
 
-    void setHandVal(int);
+    void setHandVal(HandValue);
 
-    static void BubbleSort(vector<Card>);
+    vector<Card> BubbleSort(vector<Card>);
 
-    void evaluateHand(const vector<Card>&);
+    void evaluateHand(vector<Card>);
 
-    static bool isStraight(vector<Card>);
+    static bool isStraight(vector<Card>&);
 
-    static bool isFlush(vector<Card>);
+    static bool isFlush(vector<Card>&);
 
-    static bool isStraightFlush(const vector<Card>&);
+    static bool isStraightFlush(vector<Card>&);
 
-    static bool isPair(vector<Card>);
+    static bool isPair(vector<Card>&);
 
-    static bool isTwoPair(vector<Card>);
+    static bool isTwoPair(vector<Card>&);
 
-    static bool isTrips(vector<Card>);
+    static bool isTrips(vector<Card>&);
 
-    static bool isFullHouse(const vector<Card>&);
+    static bool isFullHouse(vector<Card>&);
 
-    static bool isQuads(vector<Card>);
+    static bool isQuads(vector<Card>&);
 
     friend std::ostream& operator << (std::ostream& outs, const Player &player);
 };

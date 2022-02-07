@@ -21,8 +21,6 @@ public:
 
     void turn(std::vector<Card>,std::vector<Card>);
 
-    void newHands(std::vector<Player>, std::vector<Card>);
-
     int evaluatePlayers(std::vector<Player>,std::vector<Card>);
 
     void createDeck(std::vector<Card> &deck);
@@ -41,7 +39,9 @@ public:
 
     void printCardsInPlay(std::ostream &outs, std::vector<Card>);
 
-    void printPlayerHands(std::ostream &outs, std::vector<Player>);
+    void printPlayersHands(std::ostream &outs, std::vector<Player>);
+
+    ostream& printPlayerHand(std::ostream &outs, Player);
 
     static void printRules(std::ostream &outs);
 

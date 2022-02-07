@@ -44,6 +44,10 @@ bool operator < (const Card& lhs, const Card& rhs) {
     return lhs.getValue() < rhs.getValue();
 }
 
+bool operator == (const Card& lhs, const Card& rhs) {
+    return lhs.getValue() < rhs.getValue();
+}
+
 std::ostream& operator << (std::ostream& outs, const Card &card) {
     if (card.getValue()== ACE) {
         outs << "ACE";
@@ -85,16 +89,16 @@ std::ostream& operator << (std::ostream& outs, const Card &card) {
         outs << "TWO";
     }
     if (card.getSuit() == HEART) {
-        outs << "of HEARTS";
+        outs << " of HEARTS";
     }
     else if (card.getSuit() == SPADE) {
-        outs << "of SPADES";
+        outs << " of SPADES";
     }
     else if (card.getSuit() == DIAMOND) {
-        outs << "of DIAMONDS";
+        outs << " of DIAMONDS";
     }
     else {
-        outs << "of CLUBS";
+        outs << " of CLUBS";
     }
     return outs;
 }
