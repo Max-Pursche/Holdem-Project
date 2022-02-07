@@ -15,11 +15,11 @@ I want to add:
 - the royal flush
 
 ##Bugs
-evaluateHand() - has trouble recognising the correct combination of card values with the corresponding hand
+- evaluateHand() - has trouble recognising the correct combination of card values with the corresponding hand
 
 ##Citations
-CS120 Github/BlackBoard
-w3 Schools
+- CS120 Github/BlackBoard
+- w3 Schools
 
 ##Grade Earned
 I believe I earned 75 - 80 points on this project.
