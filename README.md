@@ -10,8 +10,8 @@ if you guess the wrong combination then you lose points
 I want to add:
 - chips and chip counts,
 - users being able to initialize a game of players with chips and playing multiple rounds,
-- visuals during the graphics portion,
-- fleshing out evaluatePlayers() to check for high card of a straight
+- visuals during the graphics portion of this class,
+- fleshing out evaluatePlayers() to check for high card of a straight/ flush,
 - the royal flush
 
 ##Bugs
