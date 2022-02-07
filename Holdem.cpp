@@ -92,8 +92,7 @@ void HoldemGame::runGame() {
                     playerScore += 5;
                     cout << "You guessed right!\n+5 points\nYour Score:" << to_string(playerScore) << endl;
                 }
-                else if (playChoice == 2) {
-                    //(evaluation - 1)
+                else if (playChoice == (evaluation - 1)) {
                     playerScore += 2;
                     cout << "You had the right idea..\n+2 points\nYour Score:" << to_string(playerScore) << endl;
                 }
