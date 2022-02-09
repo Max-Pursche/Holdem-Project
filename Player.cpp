@@ -71,6 +71,7 @@ void Player::evaluateHand(vector<Card> board) {
     //sorting into ascending order 0 - 12
     fullHand = BubbleSort(board);
     //checking and setting hand values
+    //Consider using a switch statement
     if (isStraightFlush(fullHand)){
         setHandVal(STRAIGHTFLUSH);
     }

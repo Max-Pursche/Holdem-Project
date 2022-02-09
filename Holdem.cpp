@@ -74,7 +74,7 @@ void HoldemGame::runGame() {
 
                 //turn portion: eventually will score players
                 cout << "The Turn" << endl;
-                randGen = rand()% deck.size() + 1;
+                randGen = rand()%deck.size() + 1;
                 cout << mainDeck[randGen] << endl;
                 cardsInPlay.push_back(deck[randGen]);
                 removeCard(randGen, deck);
@@ -97,6 +97,7 @@ void HoldemGame::runGame() {
                     cout << "You had the right idea..\n+2 points\nYour Score:" << to_string(playerScore) << endl;
                 }
                 else if(playerScore != 0) {
+                    playerScore -= 1;
                     cout << "nice try, time to touch up your hand range sense!\n-2 points\nYour Score:" << to_string(playerScore) << endl;
                 }
                 else {
@@ -151,7 +152,7 @@ int HoldemGame::evaluatePlayers(vector<Player> tablePlayers, vector<Card> board)
     }
 }
 
-void HoldemGame::createDeck(vector<Card> &deck) {
+void HoldemGame::createDeck(vector<Card>& deck) {
     Card card;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 13; j++) {
@@ -163,7 +164,7 @@ void HoldemGame::createDeck(vector<Card> &deck) {
     }
 }
 
-void HoldemGame::removeCard(int index1, vector<Card> deck){
+void HoldemGame::removeCard(int index1, vector<Card>& deck){
     //loop through vector of cards with index value from random generation
     for(int i=0; i < deck.size();i++) {
         //if the index value of the loop is equal to the index value generated

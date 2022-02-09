@@ -36,13 +36,13 @@ public:
     /*
      * Will initialize a deck of 52 cards with 4 suits and 13 values
      */
-    void createDeck(std::vector<Card> &deck);
+    void createDeck(std::vector<Card>&);
 
     /*
      * Fields: A vector of Cards, an int value representing the index of the deck
      * Removes the index value of the specified vector
      */
-    void removeCard(int, std::vector<Card>);
+    void removeCard(int, std::vector<Card>&);
 
     /*
      * Player input function asking for 1,2,3,or 4 depending on the player that
