@@ -5,10 +5,10 @@
 #include "Card.h"
 #include "Player.h"
 #include "Holdem.h"
-bool testPlayerFunction(Player);
-bool testPlayerHands(Player);
-bool testCardFunction(Card);
-bool testGameFunction(HoldemGame);
+bool testPlayerFunction(Player&);
+bool testPlayerHands(Player&);
+bool testCardFunction(Card&);
+bool testGameFunction(HoldemGame&);
 int main() {
     HoldemGame testGame;
     Player testPlayer;
@@ -25,19 +25,23 @@ int main() {
     return 0;
 }
 
-bool testPlayerFunction(Player fTestPlayer) {
-
-
+bool testPlayerFunction(Player& fTestPlayer) {
+    //testing getters and setters
+    return true;
 }
 
-bool testPlayerHands(Player fTestPlayer) {
-
+bool testPlayerHands(Player& fTestPlayer) {
+    //inputting vectors with set hands to test all of the possible hands
+    // in a player and checking to see if evaluateHand() works
+    return true;
 }
 
-bool testCardFunction(Card fTestCard) {
+bool testCardFunction(Card& fTestCard) {
 
+    return true;
 }
 
-bool testGameFunction(HoldemGame fTestGame) {
+bool testGameFunction(HoldemGame& fTestGame) {
 
+    return true;
 }

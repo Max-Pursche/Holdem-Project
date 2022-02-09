@@ -62,7 +62,7 @@ vector<Card> Player::BubbleSort(vector<Card> handCrds) {
 }
 
 //straight flush is the highest hand I am going to add for now, maybe royal if I can finish this before sunday
-void Player::evaluateHand(vector<Card> board) {
+void Player::evaluateHand(vector<Card>& board) {
     //loop through the board to make a hand which will be set to a hand value,
     //want to make this organised from lowest to highest value for easier looping in isStraight
     vector<Card> fullHand;

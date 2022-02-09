@@ -92,7 +92,7 @@ public:
      * Fields: vector of cards
      * calls functions that check the vector of cards for specific types of poker hands
      */
-    void evaluateHand(vector<Card>);
+    void evaluateHand(vector<Card>&);
 
     /*
      * Fields: vector of cards
