@@ -48,6 +48,7 @@ void Player::setHandVal(HandValue value) {
     hand.handVal = value;
 }
 
+//we are changing this max... we cant go on like this
 vector<Card> Player::BubbleSort(vector<Card> handCrds) {
     for( int i = 0 ; i < handCrds.size(); ++i ) {
         for (int j = i + 1; j < handCrds.size(); ++j) {

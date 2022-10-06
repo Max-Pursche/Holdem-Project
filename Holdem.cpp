@@ -117,6 +117,7 @@ void HoldemGame::runGame() {
     }
 }
 
+//so much bubble sort :'( gotta fix
 int HoldemGame::evaluatePlayers(vector<Player> tablePlayers, vector<Card> board) {
     //sorts the vector of players in descending order with highest hand first lowest hand last
     for (int i = 0; i < tablePlayers.size(); i++) {
@@ -164,6 +165,7 @@ void HoldemGame::createDeck(vector<Card>& deck) {
     }
 }
 
+//Not working
 void HoldemGame::removeCard(int index1, vector<Card>& deck){
     //loop through vector of cards with index value from random generation
     for(int i=0; i < deck.size();i++) {

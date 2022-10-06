@@ -13,10 +13,11 @@ I want to add:
 - the royal flush
 - Running this using homemade graphics
 
-##Bugs
+##Bugs/Functionality Fixes
 - evaluateHand() - has trouble recognising the correct combination of card values with the corresponding hand
 - The Deck isn't erasing cards properly when utilising them
 - The player evaluations aren't accurate
+- The Ace is not applying the optimal value if it is a winning combination
 
 ##Citations
 - CS120 Github/BlackBoard
