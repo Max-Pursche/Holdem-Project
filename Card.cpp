@@ -45,7 +45,7 @@ bool operator < (const Card& lhs, const Card& rhs) {
 }
 
 bool operator == (const Card& lhs, const Card& rhs) {
-    return lhs.getValue() < rhs.getValue();
+    return lhs.getValue() == rhs.getValue();
 }
 
 std::ostream& operator << (std::ostream& outs, const Card &card) {

@@ -62,7 +62,7 @@ void HoldemGame::runGame() {
 
                 //first three cards
                 for (int i = 0; i < 3; i++) {
-                    int randInt = rand()% deck.size() + 1;
+                    int randInt = rand()%deck.size() + 1;
                     cardsInPlay.push_back(mainDeck[randInt]);
                     removeCard(randInt, mainDeck);
                 }
@@ -180,7 +180,7 @@ int HoldemGame::getPlayerChoice(std::ostream &outs, std::istream &ins) {
     printPlayerOptions(outs);
     ins >> choice;
     while (choice != 1 && choice !=  2 && choice != 3 && choice != 4) {
-        outs << endl << "Invalid option. " << endl;
+        outs << "Invalid option. " << endl;
         printPlayerOptions(outs);
         ins >> choice;
     }
