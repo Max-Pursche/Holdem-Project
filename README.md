@@ -5,7 +5,7 @@ The user will be given 4 different players with different hands of cards
 If you guess the winning combination then you get points
 If you guess the wrong combination then you lose points
 
-##Future Implementations
+# Future Implementations
 I want to add:
 - chips and chip counts,
 - users being able to initialize a game of players with chips and playing multiple rounds,
@@ -13,12 +13,12 @@ I want to add:
 - the royal flush
 - Running this using homemade graphics
 
-##Bugs/Functionality Fixes
+# Bugs/Functionality Fixes
 - evaluateHand() - has trouble recognising the correct combination of card values with the corresponding hand
 - The Deck isn't erasing cards properly when utilising them
 - The player evaluations aren't accurate
 - The Ace is not applying the optimal value if it is a winning combination
 
-##Citations
+# Citations
 - CS120 Github/BlackBoard
 - w3 Schools
