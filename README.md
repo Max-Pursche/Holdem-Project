@@ -1,4 +1,4 @@
-# -Texas Holdem by Max Pursche
+# Texas Holdem by Max Pursche
 
 A texas holdem game where you bet on the probability of a set of players winning with a selected players hand
 The user will be given 4 different players with different hands of cards
