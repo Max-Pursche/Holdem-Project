@@ -1,7 +1,7 @@
 # -Texas Holdem by Max Pursche
 
 A texas holdem game where you bet on the probability of a set of players winning with a selected players hand
-The player will be given 4 different players with different hands of cards
+The user will be given 4 different players with different hands of cards
 If you guess the winning combination then you get points
 If you guess the wrong combination then you lose points
 
